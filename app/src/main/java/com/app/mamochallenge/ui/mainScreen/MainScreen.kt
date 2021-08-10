@@ -10,26 +10,17 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MainScreen() {
-    val keyboardItemsList: List<String> = remember {
-        val list = mutableListOf<String>()
-        for (number in 1..9) {
-            list.add(number.toString())
-        }
-        list.apply {
-            add(".")
-            add("0")
-            add("⌫")
-        }
-    }
+fun MainScreen(
+    mainViewModel: MainViewModel = viewModel()
+) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -50,7 +41,7 @@ fun MainScreen() {
         LazyVerticalGrid(
             cells = GridCells.Fixed(3)
         ) {
-            items(keyboardItemsList) { item ->
+            items(mainViewModel.keyboardItemsList) { item ->
                 Box(
                     modifier = Modifier.height(104.dp),
                     contentAlignment = Alignment.Center
@@ -65,7 +56,7 @@ fun MainScreen() {
                         }
                     ) {
                         Text(
-                            text = item,
+                            text = item.toString(),
                             fontSize = 24.sp,
                             color = MaterialTheme.colors.primary,
                         )
