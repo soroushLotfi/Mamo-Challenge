@@ -42,7 +42,8 @@ fun MainScreen() {
             Text(
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp),
                 text = "123",
-                fontSize = 48.sp
+                fontSize = 48.sp,
+                color = MaterialTheme.colors.onBackground
             )
         }
         Spacer(modifier = Modifier.height(24.dp))
