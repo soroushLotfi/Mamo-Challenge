@@ -1,7 +1,9 @@
 package com.app.mamochallenge.ui.mainScreen
 
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
 
@@ -17,10 +19,58 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    val formattedNumberFlow = MutableStateFlow("0.00")
+    private val lastPressedItemFlow = MutableSharedFlow<Char>()
 
-    fun onItemPressed(item: Char) {
+    private val enteredNumberFlow = MutableStateFlow("")
 
+    val formattedNumberFlow = enteredNumberFlow.map {
+        formatNumber(it)
+    }
+
+    init {
+        viewModelScope.launch {
+            lastPressedItemFlow.collect {
+                handlePressedItem(it)
+            }
+        }
+    }
+
+    fun onItemPressed(item: Char) = viewModelScope.launch {
+        lastPressedItemFlow.emit(item)
+    }
+
+    private suspend fun handlePressedItem(item: Char) {
+        val currentNumber = enteredNumberFlow.first()
+        when (item) {
+            POINT -> if (currentNumber.lastOrNull() != POINT) {
+                enteredNumberFlow.emit("$currentNumber$POINT")
+            }
+            BACKSPACE -> if (currentNumber.isNotEmpty()) {
+                val digitsToDrop = if (currentNumber.endsWith(POINT)) 2 else 1
+                enteredNumberFlow.emit(currentNumber.dropLast(digitsToDrop))
+            }
+            else -> if (
+                !currentNumber.contains(POINT)
+                || currentNumber.substringAfter(POINT).length < 2
+            ) {
+                enteredNumberFlow.emit("$currentNumber$item")
+            }
+        }
+    }
+
+    private fun formatNumber(numberToFormat: String): String {
+        val realNumber = numberToFormat.let { number ->
+            if (number.isEmpty()) "0" else number.dropLastWhile { it == POINT }
+        }
+        val wholePart = realNumber.substringBefore(POINT).toInt()
+        val formattedWholePart = String.format("%,d", wholePart)
+        val decimalPart = realNumber
+            .substringAfter(POINT, "00")
+            .let {
+                if (it.length == 1) "$it${0}" else it
+            }
+            .substring(0..1)
+        return "$formattedWholePart$POINT$decimalPart"
     }
 
     companion object {
