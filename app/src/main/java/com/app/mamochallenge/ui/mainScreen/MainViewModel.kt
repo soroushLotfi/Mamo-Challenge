@@ -58,7 +58,9 @@ class MainViewModel : ViewModel() {
                 !currentNumber.contains(POINT)
                 || currentNumber.substringAfter(POINT).length < 2
             ) {
-                enteredNumberFlow.emit("$currentNumber$item")
+                if (currentNumber.contains(POINT) || currentNumber.length < 9) {
+                    enteredNumberFlow.emit("$currentNumber$item")
+                }
             }
         }
     }
