@@ -10,6 +10,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -21,6 +22,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun MainScreen(
     mainViewModel: MainViewModel = viewModel()
 ) {
+    val number = mainViewModel.formattedNumberFlow.collectAsState(initial = "0.00")
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -32,7 +34,7 @@ fun MainScreen(
         ) {
             Text(
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-                text = "123",
+                text = number.value,
                 fontSize = 48.sp,
                 color = MaterialTheme.colors.onBackground
             )
@@ -52,7 +54,7 @@ fun MainScreen(
                             .width(80.dp),
                         shape = CircleShape,
                         onClick = {
-
+                            mainViewModel.onItemPressed(item)
                         }
                     ) {
                         Text(
