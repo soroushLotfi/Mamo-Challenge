@@ -43,7 +43,12 @@ class MainViewModel : ViewModel() {
         val currentNumber = enteredNumberFlow.first()
         when (item) {
             POINT -> if (currentNumber.lastOrNull() != POINT) {
-                enteredNumberFlow.emit("$currentNumber$POINT")
+                val wholePart = if (currentNumber.isEmpty()) {
+                    0
+                } else {
+                    currentNumber
+                }
+                enteredNumberFlow.emit("$wholePart$POINT")
             }
             BACKSPACE -> if (currentNumber.isNotEmpty()) {
                 val digitsToDrop = if (currentNumber.endsWith(POINT)) 2 else 1
