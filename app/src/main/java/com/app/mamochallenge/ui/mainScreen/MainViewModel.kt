@@ -1,6 +1,7 @@
 package com.app.mamochallenge.ui.mainScreen
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class MainViewModel : ViewModel() {
 
@@ -14,6 +15,12 @@ class MainViewModel : ViewModel() {
             add('0')
             add(BACKSPACE)
         }
+    }
+
+    val formattedNumberFlow = MutableStateFlow("0.00")
+
+    fun onItemPressed(item: Char) {
+
     }
 
     companion object {
