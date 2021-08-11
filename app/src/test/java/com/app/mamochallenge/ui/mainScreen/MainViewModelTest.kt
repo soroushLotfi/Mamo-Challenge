@@ -93,6 +93,14 @@ class MainViewModelTest {
     }
 
     @Test
+    fun pressPointFirstThenEnterNumber() = runBlockingTest {
+        mainViewModel.onItemPressed('.')
+        mainViewModel.onItemPressed('4')
+        val number = mainViewModel.formattedNumberFlow.first()
+        assertThat(number).isEqualTo("0.40")
+    }
+
+    @Test
     fun pressBackspaceWithNoNumber() = runBlockingTest {
         mainViewModel.onItemPressed('⌫')
         val number = mainViewModel.formattedNumberFlow.first()
