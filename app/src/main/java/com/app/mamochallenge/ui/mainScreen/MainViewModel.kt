@@ -74,7 +74,6 @@ class MainViewModel : ViewModel() {
             .let {
                 if (it.length == 1) "$it${0}" else it
             }
-            .substring(0..1)
         return "$formattedWholePart$POINT$decimalPart"
     }
 
