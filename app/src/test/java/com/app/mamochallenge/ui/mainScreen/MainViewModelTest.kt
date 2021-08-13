@@ -161,7 +161,7 @@ class MainViewModelTest {
         mainViewModel.onItemPressed('⌫')
         mainViewModel.onItemPressed('⌫')
         val number = mainViewModel.formattedNumberFlow.first().string
-        assertThat(number).isEqualTo("362.00")
+        assertThat(number).isEqualTo("3,629.00")
     }
 
     @Test
