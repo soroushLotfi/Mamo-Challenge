@@ -49,7 +49,7 @@ fun MainScreen(
                 .weight(1f),
             contentAlignment = Alignment.BottomCenter
         ) {
-            MultipleStylesInText(formattedNumber = number.value)
+            NumberText(formattedNumber = number.value)
         }
         Spacer(modifier = Modifier.height(24.dp))
         LazyVerticalGrid(
@@ -83,7 +83,7 @@ fun MainScreen(
 }
 
 @Composable
-fun MultipleStylesInText(formattedNumber: FormattedNumber) {
+fun NumberText(formattedNumber: FormattedNumber) {
     val wholePart = formattedNumber.wholePart
     val tenths = formattedNumber.tenths
     val hundredths = formattedNumber.hundredths
