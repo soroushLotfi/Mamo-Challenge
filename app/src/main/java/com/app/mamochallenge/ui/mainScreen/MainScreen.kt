@@ -105,8 +105,7 @@ fun MultipleStylesInText(formattedNumber: FormattedNumber) {
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
             .semantics { contentDescription = "NumberText" },
-        fontSize = 48.sp,
-        color = MaterialTheme.colors.onBackground
+        fontSize = 48.sp
     )
 }
 
