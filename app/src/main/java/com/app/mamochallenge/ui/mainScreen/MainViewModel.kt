@@ -72,16 +72,38 @@ class MainViewModel : ViewModel() {
         }
         val wholePart = realNumber.substringBefore(POINT).toInt()
         val formattedWholePart = String.format("%,d", wholePart)
-        val decimalPart = realNumber
-            .substringAfter(POINT, "00")
-            .let {
-                if (it.length == 1) "$it${0}" else it
+        val decimalPart = realNumber.substringAfter(POINT, "")
+        val tenths: String
+        val hundredths: String
+        val hasTenths: Boolean
+        val hasHundredths: Boolean
+        when {
+            decimalPart.isEmpty() -> {
+                tenths = "0"
+                hundredths = "0"
+                hasTenths = false
+                hasHundredths = false
             }
+            decimalPart.length == 1 -> {
+                tenths = decimalPart[0].toString()
+                hundredths = "0"
+                hasTenths = true
+                hasHundredths = false
+            }
+            else -> {
+                tenths = decimalPart[0].toString()
+                hundredths = decimalPart[1].toString()
+                hasTenths = true
+                hasHundredths = true
+            }
+        }
         return FormattedNumber(
             formattedWholePart,
-            decimalPart[0].toString(),
-            decimalPart[1].toString(),
-            numberToFormat.contains(POINT)
+            tenths,
+            hundredths,
+            numberToFormat.contains(POINT),
+            hasTenths,
+            hasHundredths
         )
     }
 

@@ -31,7 +31,14 @@ fun MainScreen(
     mainViewModel: MainViewModel = viewModel()
 ) {
     val number = mainViewModel.formattedNumberFlow.collectAsState(
-        FormattedNumber("0", "0", "0", false)
+        FormattedNumber(
+            "0",
+            "0",
+            "0",
+            hasPoint = false,
+            hasTenths = false,
+            hasHundredths = false
+        )
     )
     Column(
         modifier = Modifier.fillMaxSize()
@@ -78,9 +85,11 @@ fun MainScreen(
 @Composable
 fun MultipleStylesInText(formattedNumber: FormattedNumber) {
     val wholePart = formattedNumber.wholePart
-    val isDecimalEnabled = formattedNumber.isDecimalEnabled
     val tenths = formattedNumber.tenths
     val hundredths = formattedNumber.hundredths
+    val hasPoint = formattedNumber.hasPoint
+    val hasTenths = formattedNumber.hasTenths
+    val hasHundredths = formattedNumber.hasHundredths
     Text(
         text = buildAnnotatedString {
             append("\u200E")
@@ -89,15 +98,15 @@ fun MultipleStylesInText(formattedNumber: FormattedNumber) {
                 append("AED ")
                 append(wholePart)
             }
-            val pointColor = getSuitableTextColor(isDecimalEnabled)
+            val pointColor = getSuitableTextColor(hasPoint)
             withStyle(style = SpanStyle(color = pointColor)) {
                 append('.')
             }
-            val tenthsPartColor = getSuitableTextColor(tenths != "0")
+            val tenthsPartColor = getSuitableTextColor(hasTenths)
             withStyle(style = SpanStyle(color = tenthsPartColor)) {
                 append(tenths)
             }
-            val hundredthsPartColor = getSuitableTextColor(hundredths != "0")
+            val hundredthsPartColor = getSuitableTextColor(hasHundredths)
             withStyle(style = SpanStyle(color = hundredthsPartColor)) {
                 append(hundredths)
             }
