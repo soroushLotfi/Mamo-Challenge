@@ -94,7 +94,7 @@ fun NumberText(formattedNumber: FormattedNumber) {
     Text(
         text = buildAnnotatedString {
             append("\u200E")
-            val wholePartColor = getSuitableTextColor(wholePart != "0")
+            val wholePartColor = getSuitableTextColor(wholePart != "0" || hasPoint)
             withStyle(style = SpanStyle(color = wholePartColor)) {
                 append("AED ")
                 append(wholePart)
