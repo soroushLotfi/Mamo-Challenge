@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -33,7 +35,9 @@ fun MainScreen(
             contentAlignment = Alignment.BottomCenter
         ) {
             Text(
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp)
+                    .semantics { contentDescription = "NumberText" },
                 text = number.value,
                 fontSize = 48.sp,
                 color = MaterialTheme.colors.onBackground
