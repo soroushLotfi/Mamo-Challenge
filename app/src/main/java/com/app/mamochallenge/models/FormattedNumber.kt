@@ -5,4 +5,6 @@ data class FormattedNumber(
     val tenths: String,
     val hundredths: String,
     val isDecimalEnabled: Boolean
-)
+) {
+    val string get() = "$wholePart.$tenths$hundredths"
+}

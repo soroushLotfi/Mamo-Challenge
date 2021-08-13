@@ -35,7 +35,7 @@ class MainViewModelTest {
         mainViewModel.onItemPressed('2')
         mainViewModel.onItemPressed('9')
         mainViewModel.onItemPressed('4')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("36,294.00")
     }
 
@@ -47,7 +47,7 @@ class MainViewModelTest {
         mainViewModel.onItemPressed('2')
         mainViewModel.onItemPressed('9')
         mainViewModel.onItemPressed('4')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("36,294.00")
     }
 
@@ -60,7 +60,7 @@ class MainViewModelTest {
         mainViewModel.onItemPressed('.')
         mainViewModel.onItemPressed('7')
         mainViewModel.onItemPressed('1')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("3,629.71")
     }
 
@@ -75,7 +75,7 @@ class MainViewModelTest {
         mainViewModel.onItemPressed('1')
         mainViewModel.onItemPressed('6')
         mainViewModel.onItemPressed('2')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("3,629.71")
     }
 
@@ -88,7 +88,7 @@ class MainViewModelTest {
         mainViewModel.onItemPressed('.')
         mainViewModel.onItemPressed('0')
         mainViewModel.onItemPressed('1')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("3,629.01")
     }
 
@@ -96,14 +96,14 @@ class MainViewModelTest {
     fun pressPointFirstThenEnterNumber() = runBlockingTest {
         mainViewModel.onItemPressed('.')
         mainViewModel.onItemPressed('4')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("0.40")
     }
 
     @Test
     fun pressBackspaceWithNoNumber() = runBlockingTest {
         mainViewModel.onItemPressed('⌫')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("0.00")
     }
 
@@ -115,7 +115,7 @@ class MainViewModelTest {
         mainViewModel.onItemPressed('9')
         mainViewModel.onItemPressed('4')
         mainViewModel.onItemPressed('⌫')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("3,629.00")
     }
 
@@ -129,7 +129,7 @@ class MainViewModelTest {
         mainViewModel.onItemPressed('7')
         mainViewModel.onItemPressed('1')
         mainViewModel.onItemPressed('⌫')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("3,629.70")
     }
 
@@ -144,7 +144,7 @@ class MainViewModelTest {
         mainViewModel.onItemPressed('1')
         mainViewModel.onItemPressed('⌫')
         mainViewModel.onItemPressed('⌫')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("3,629.00")
     }
 
@@ -160,7 +160,7 @@ class MainViewModelTest {
         mainViewModel.onItemPressed('⌫')
         mainViewModel.onItemPressed('⌫')
         mainViewModel.onItemPressed('⌫')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("362.00")
     }
 
@@ -177,7 +177,7 @@ class MainViewModelTest {
         mainViewModel.onItemPressed('2')
         mainViewModel.onItemPressed('⌫')
         mainViewModel.onItemPressed('⌫')
-        val number = mainViewModel.formattedNumberFlow.first()
+        val number = mainViewModel.formattedNumberFlow.first().string
         assertThat(number).isEqualTo("3,629.00")
     }
 
