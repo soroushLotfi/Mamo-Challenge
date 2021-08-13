@@ -2,6 +2,7 @@ package com.app.mamochallenge.ui.mainScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.app.mamochallenge.models.FormattedNumber
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -65,7 +66,7 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    private fun formatNumber(numberToFormat: String): String {
+    private fun formatNumber(numberToFormat: String): FormattedNumber {
         val realNumber = numberToFormat.let { number ->
             if (number.isEmpty()) "0" else number.dropLastWhile { it == POINT }
         }
@@ -76,7 +77,12 @@ class MainViewModel : ViewModel() {
             .let {
                 if (it.length == 1) "$it${0}" else it
             }
-        return "$formattedWholePart$POINT$decimalPart"
+        return FormattedNumber(
+            formattedWholePart,
+            decimalPart[0].toString(),
+            decimalPart[1].toString(),
+            numberToFormat.contains(POINT)
+        )
     }
 
     companion object {
