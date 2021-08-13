@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.app.mamochallenge.models.FormattedNumber
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.util.*
 
 class MainViewModel : ViewModel() {
 
@@ -70,7 +71,7 @@ class MainViewModel : ViewModel() {
             if (number.isEmpty()) "0" else number.dropLastWhile { it == POINT }
         }
         val wholePart = realNumber.substringBefore(POINT).toInt()
-        val formattedWholePart = String.format("%,d", wholePart)
+        val formattedWholePart = String.format(Locale.US, "%,d", wholePart)
         val decimalPart = realNumber.substringAfter(POINT, "")
         val tenths: String
         val hundredths: String
