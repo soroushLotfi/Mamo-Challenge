@@ -20,14 +20,11 @@ class MainScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private lateinit var mainViewModel: MainViewModel
-
     @Before
     fun setUp() {
-        mainViewModel = MainViewModel()
         composeTestRule.setContent {
             MamoChallengeTheme {
-                MainScreen(mainViewModel)
+                MainScreen()
             }
         }
     }
