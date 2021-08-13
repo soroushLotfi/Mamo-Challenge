@@ -13,11 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.app.mamochallenge.R
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -38,7 +40,7 @@ fun MainScreen(
                 modifier = Modifier
                     .padding(start = 16.dp, end = 16.dp)
                     .semantics { contentDescription = "NumberText" },
-                text = number.value,
+                text = stringResource(R.string.price, number.value),
                 fontSize = 48.sp,
                 color = MaterialTheme.colors.onBackground
             )
