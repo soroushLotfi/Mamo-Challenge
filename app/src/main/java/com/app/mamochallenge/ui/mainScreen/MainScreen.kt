@@ -19,6 +19,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -114,7 +115,8 @@ fun NumberText(formattedNumber: FormattedNumber) {
         modifier = Modifier
             .padding(start = 16.dp, end = 16.dp)
             .semantics { contentDescription = "NumberText" },
-        fontSize = 48.sp
+        fontSize = 48.sp,
+        textAlign = TextAlign.Center
     )
 }
 
